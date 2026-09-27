@@ -364,5 +364,22 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
   </address>
 </footer>
 <a class="cta mobile-cta" href="https://liff.line.me/2011299304-9aMpCJVv/salon/dateselector/week/2026/9/27?liff_id=2011299304-9aMpCJVv&amp;is=0tYlk1UdbC" target="_blank" rel="noopener"><span class="bb">Founding Partnerの</span><span class="bb">説明を</span><span class="bb">聞く</span></a>
+<script>
+/* LINEの日程調整URLに埋まっている週（/week/YYYY/M/D）を、開いた日に差し替える。
+   失敗したら何もせず、HTMLに書いてある日付のまま使う。 */
+(function () {
+  try {
+    var d = new Date();
+    var ymd = d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate();
+    var links = document.querySelectorAll('a[href*="liff.line.me"]');
+    for (var i = 0; i !== links.length; i++) {
+      var href = links[i].getAttribute('href');
+      if (!href) { continue; }
+      var next = href.replace(/\/week\/\d{4}\/\d{1,2}\/\d{1,2}/, '/week/' + ymd);
+      if (next !== href) { links[i].setAttribute('href', next); }
+    }
+  } catch (e) { /* そのまま */ }
+})();
+</script>
 </body>
 </html>
