@@ -15,6 +15,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" as="image" href="hero-partners.webp" type="image/webp" fetchpriority="high">
+<script>
+/* 動きを減らす設定の人には何もしない */
+try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver'in window){
+  document.documentElement.className+=' anim';}}catch(e){}
+</script>
 <style>
 :root{
   --forest:#153d32;--deep:#102820;--ink:#1d2d28;--muted:#53625c;--gold:#d0a85f;
@@ -23,7 +28,8 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}
+  .anim [data-r]{opacity:1;transform:none}}
 body{margin:0;background:var(--paper);color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;
   line-height:1.85;font-size:16px;font-feature-settings:"palt" 1;
@@ -33,6 +39,15 @@ img{max-width:100%;height:auto}
 h1,h2,h3{line-height:1.42;letter-spacing:.01em}
 /* 文節単位の改行（PC・スマホ共通）: 生成された span は行内で分割されない */
 .bb{display:inline-block}
+
+/* ---------- 表示アニメーション ----------
+   JS が html に .anim を付けたときだけ効く。
+   JS が動かない環境・動きを減らす設定では、最初からすべて表示される。 */
+.anim [data-r]{opacity:0;transform:translateY(14px)}
+.anim [data-r].is-in{opacity:1;transform:none;
+  transition:opacity .55s ease,transform .55s cubic-bezier(.22,.7,.28,1)}
+.top{transition:box-shadow .25s ease}
+.top.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.3)}
 :where(a,button,[tabindex]):focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
 .skip{position:absolute;left:-9999px;top:0;background:#fff;color:var(--forest);padding:10px 16px;z-index:100}
 .skip:focus{left:8px;top:8px}
@@ -56,10 +71,10 @@ h1,h2,h3{line-height:1.42;letter-spacing:.01em}
 .caption{font-size:12.5px;color:#cfdcd3;margin-top:14px}
 
 /* ---------- cta ---------- */
-.cta{display:inline-flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;margin-top:22px;padding:16px 26px;
+.cta{transition:background .2s ease,transform .2s ease;display:inline-flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;margin-top:22px;padding:16px 26px;
   background:var(--gold);color:#182c23;border-radius:6px;text-decoration:none;font-weight:800;
   min-height:52px;border:0;font-size:16px;cursor:pointer;text-align:center}
-.cta:hover{background:#c39a4f}
+.cta:hover{background:#c39a4f;transform:translateY(-1px)}
 
 /* ---------- layout ---------- */
 .wrap{width:min(var(--wrap),calc(100% - 48px));margin:auto}
@@ -224,70 +239,70 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
 
 <section class="hero">
   <div class="hero-inner">
-    <p class="eyebrow">創設一次代理店 / FOUNDING PARTNER</p>
-    <h1><span class="bb">社長の</span><span class="bb">想いを、</span><br><span class="bb">社員と</span><span class="bb">家族の</span><span class="bb">暮らしへ。</span></h1>
-    <p><span class="bb">人生支援を、</span><span class="bb">地域の</span><span class="bb">企業へ</span><span class="bb">届ける。</span><span class="bb">REALIZECLUBの</span><span class="bb">創設一次代理店として、</span><span class="bb">会社から</span><span class="bb">始まる</span><span class="bb">学びと</span><span class="bb">相談の</span><span class="bb">環境を</span><span class="bb">一緒に</span><span class="bb">つくる</span><span class="bb">仲間を</span><span class="bb">募集します。</span><span class="bb">今回の</span><span class="bb">募集枠は</span><span class="bb">20社、</span><span class="bb">法人</span><span class="bb">対象・審査制です。</span></p>
-    <a class="cta" href="#role"><span class="bb">Founding Partnerの</span><span class="bb">役割を</span><span class="bb">見る</span></a>
-    <p class="caption"><span class="bb">すべては、</span><span class="bb">100年後の</span><span class="bb">子どもたちへ。</span></p>
+    <p class="eyebrow" data-r>創設一次代理店 / FOUNDING PARTNER</p>
+    <h1 data-r><span class="bb">社長の</span><span class="bb">想いを、</span><br><span class="bb">社員と</span><span class="bb">家族の</span><span class="bb">暮らしへ。</span></h1>
+    <p data-r><span class="bb">人生支援を、</span><span class="bb">地域の</span><span class="bb">企業へ</span><span class="bb">届ける。</span><span class="bb">REALIZECLUBの</span><span class="bb">創設一次代理店として、</span><span class="bb">会社から</span><span class="bb">始まる</span><span class="bb">学びと</span><span class="bb">相談の</span><span class="bb">環境を</span><span class="bb">一緒に</span><span class="bb">つくる</span><span class="bb">仲間を</span><span class="bb">募集します。</span><span class="bb">今回の</span><span class="bb">募集枠は</span><span class="bb">20社、</span><span class="bb">法人</span><span class="bb">対象・審査制です。</span></p>
+    <a class="cta" href="#role" data-r><span class="bb">Founding Partnerの</span><span class="bb">役割を</span><span class="bb">見る</span></a>
+    <p class="caption" data-r><span class="bb">すべては、</span><span class="bb">100年後の</span><span class="bb">子どもたちへ。</span></p>
   </div>
 </section>
 
 <section class="section white" id="why">
   <div class="wrap">
-    <p class="kicker">Why now</p>
-    <h2><span class="bb">人生は</span><span class="bb">ひとつ。</span><span class="bb">支援は、</span><span class="bb">まだ</span><span class="bb">分かれている。</span></h2>
-    <p class="lead"><span class="bb">結婚、</span><span class="bb">住まい、</span><span class="bb">子育て、</span><span class="bb">健康、</span><span class="bb">老後。</span><span class="bb">人生の</span><span class="bb">選択は</span><span class="bb">つながっているのに、</span><span class="bb">学ぶ</span><span class="bb">場所や</span><span class="bb">相談先は</span><span class="bb">別々です。</span><span class="bb">社員と</span><span class="bb">家族が</span><span class="bb">自分の</span><span class="bb">未来を</span><span class="bb">考え、</span><span class="bb">必要な</span><span class="bb">支援に</span><span class="bb">つながる</span><span class="bb">環境を、</span><span class="bb">会社から</span><span class="bb">届けます。</span></p>
+    <p class="kicker" data-r>Why now</p>
+    <h2 data-r><span class="bb">人生は</span><span class="bb">ひとつ。</span><span class="bb">支援は、</span><span class="bb">まだ</span><span class="bb">分かれている。</span></h2>
+    <p class="lead" data-r><span class="bb">結婚、</span><span class="bb">住まい、</span><span class="bb">子育て、</span><span class="bb">健康、</span><span class="bb">老後。</span><span class="bb">人生の</span><span class="bb">選択は</span><span class="bb">つながっているのに、</span><span class="bb">学ぶ</span><span class="bb">場所や</span><span class="bb">相談先は</span><span class="bb">別々です。</span><span class="bb">社員と</span><span class="bb">家族が</span><span class="bb">自分の</span><span class="bb">未来を</span><span class="bb">考え、</span><span class="bb">必要な</span><span class="bb">支援に</span><span class="bb">つながる</span><span class="bb">環境を、</span><span class="bb">会社から</span><span class="bb">届けます。</span></p>
     <div class="grid">
-      <article class="card"><h3><span class="bb">会社の</span><span class="bb">想い</span></h3><p><span class="bb">社員に</span><span class="bb">長く、</span><span class="bb">安心して</span><span class="bb">働いてほしい。</span><span class="bb">給料や</span><span class="bb">制度に</span><span class="bb">込めた</span><span class="bb">想いを、</span><span class="bb">暮らしの</span><span class="bb">中まで</span><span class="bb">届けたい。</span></p></article>
-      <article class="card"><h3><span class="bb">足りなかった</span><span class="bb">環境</span></h3><p><span class="bb">仕事の</span><span class="bb">知識を</span><span class="bb">学ぶ場は</span><span class="bb">あっても、</span><span class="bb">人生に</span><span class="bb">必要な</span><span class="bb">知識を</span><span class="bb">順番に</span><span class="bb">学び、</span><span class="bb">相談する</span><span class="bb">機会は</span><span class="bb">限られていました。</span></p></article>
-      <article class="card"><h3><span class="bb">REALIZECLUB</span></h3><p><span class="bb">気づき、</span><span class="bb">学び、</span><span class="bb">人生を</span><span class="bb">設計し、</span><span class="bb">必要な</span><span class="bb">ときに</span><span class="bb">相談する。</span><span class="bb">社員と</span><span class="bb">家族を</span><span class="bb">支える</span><span class="bb">環境を</span><span class="bb">つくります。</span></p></article>
+      <article class="card" data-r><h3><span class="bb">会社の</span><span class="bb">想い</span></h3><p><span class="bb">社員に</span><span class="bb">長く、</span><span class="bb">安心して</span><span class="bb">働いてほしい。</span><span class="bb">給料や</span><span class="bb">制度に</span><span class="bb">込めた</span><span class="bb">想いを、</span><span class="bb">暮らしの</span><span class="bb">中まで</span><span class="bb">届けたい。</span></p></article>
+      <article class="card" data-r><h3><span class="bb">足りなかった</span><span class="bb">環境</span></h3><p><span class="bb">仕事の</span><span class="bb">知識を</span><span class="bb">学ぶ場は</span><span class="bb">あっても、</span><span class="bb">人生に</span><span class="bb">必要な</span><span class="bb">知識を</span><span class="bb">順番に</span><span class="bb">学び、</span><span class="bb">相談する</span><span class="bb">機会は</span><span class="bb">限られていました。</span></p></article>
+      <article class="card" data-r><h3><span class="bb">REALIZECLUB</span></h3><p><span class="bb">気づき、</span><span class="bb">学び、</span><span class="bb">人生を</span><span class="bb">設計し、</span><span class="bb">必要な</span><span class="bb">ときに</span><span class="bb">相談する。</span><span class="bb">社員と</span><span class="bb">家族を</span><span class="bb">支える</span><span class="bb">環境を</span><span class="bb">つくります。</span></p></article>
     </div>
     <ul class="six">
-      <li><span class="bb">お金</span></li><li><span class="bb">住まい</span></li><li><span class="bb">万が</span><span class="bb">一</span></li><li><span class="bb">健康</span></li><li><span class="bb">災害</span></li><li><span class="bb">老後</span></li>
+      <li data-r><span class="bb">お金</span></li><li data-r><span class="bb">住まい</span></li><li data-r><span class="bb">万が</span><span class="bb">一</span></li><li data-r><span class="bb">健康</span></li><li data-r><span class="bb">災害</span></li><li data-r><span class="bb">老後</span></li>
     </ul>
-    <p class="caution"><span class="bb">６つの</span><span class="bb">テーマは、</span><span class="bb">幸せの</span><span class="bb">形を</span><span class="bb">限定する</span><span class="bb">ものではありません。</span><span class="bb">どんな</span><span class="bb">未来を</span><span class="bb">選ぶにも</span><span class="bb">役立つ共通の</span><span class="bb">土台です。</span></p>
+    <p class="caution" data-r><span class="bb">６つの</span><span class="bb">テーマは、</span><span class="bb">幸せの</span><span class="bb">形を</span><span class="bb">限定する</span><span class="bb">ものではありません。</span><span class="bb">どんな</span><span class="bb">未来を</span><span class="bb">選ぶにも</span><span class="bb">役立つ共通の</span><span class="bb">土台です。</span></p>
   </div>
 </section>
 
 <section class="section" id="service">
   <div class="wrap">
-    <p class="kicker">The service</p>
-    <h2><span class="bb">学びから、</span><span class="bb">相談と</span><span class="bb">行動まで。</span><br><span class="bb">ひとつなぎの</span><span class="bb">人生教育を</span><span class="bb">届ける。</span></h2>
-    <p class="lead"><span class="bb">REALIZECLUBは、</span><span class="bb">社員が</span><span class="bb">自分に</span><span class="bb">合った</span><span class="bb">答えを</span><span class="bb">考えられるように、</span><span class="bb">学び・設計・対話・相談の</span><span class="bb">流れを</span><span class="bb">支えます。</span></p>
+    <p class="kicker" data-r>The service</p>
+    <h2 data-r><span class="bb">学びから、</span><span class="bb">相談と</span><span class="bb">行動まで。</span><br><span class="bb">ひとつなぎの</span><span class="bb">人生教育を</span><span class="bb">届ける。</span></h2>
+    <p class="lead" data-r><span class="bb">REALIZECLUBは、</span><span class="bb">社員が</span><span class="bb">自分に</span><span class="bb">合った</span><span class="bb">答えを</span><span class="bb">考えられるように、</span><span class="bb">学び・設計・対話・相談の</span><span class="bb">流れを</span><span class="bb">支えます。</span></p>
     <ul class="flow">
-      <li><b><span class="bb">知る</span></b><span><span class="bb">自分と</span><span class="bb">時代を</span><span class="bb">知る</span></span></li>
-      <li><b><span class="bb">学ぶ</span></b><span><span class="bb">人生の</span><span class="bb">備えを</span><span class="bb">学ぶ</span></span></li>
-      <li><b><span class="bb">描く</span></b><span><span class="bb">未来を</span><span class="bb">設計する</span></span></li>
-      <li><b><span class="bb">話す</span></b><span><span class="bb">家族や</span><span class="bb">専門家と</span><span class="bb">相談する</span></span></li>
+      <li data-r><b><span class="bb">知る</span></b><span><span class="bb">自分と</span><span class="bb">時代を</span><span class="bb">知る</span></span></li>
+      <li data-r><b><span class="bb">学ぶ</span></b><span><span class="bb">人生の</span><span class="bb">備えを</span><span class="bb">学ぶ</span></span></li>
+      <li data-r><b><span class="bb">描く</span></b><span><span class="bb">未来を</span><span class="bb">設計する</span></span></li>
+      <li data-r><b><span class="bb">話す</span></b><span><span class="bb">家族や</span><span class="bb">専門家と</span><span class="bb">相談する</span></span></li>
     </ul>
-    <p class="caution"><span class="bb">LIFE JOURNEY、</span><span class="bb">みお先生、</span><span class="bb">LIFE Record、</span><span class="bb">LIFE Consultなどを</span><span class="bb">通じて、</span><span class="bb">本人が</span><span class="bb">自分の</span><span class="bb">記録と</span><span class="bb">共有範囲を</span><span class="bb">確認しながら</span><span class="bb">利用します。</span></p>
+    <p class="caution" data-r><span class="bb">LIFE JOURNEY、</span><span class="bb">みお先生、</span><span class="bb">LIFE Record、</span><span class="bb">LIFE Consultなどを</span><span class="bb">通じて、</span><span class="bb">本人が</span><span class="bb">自分の</span><span class="bb">記録と</span><span class="bb">共有範囲を</span><span class="bb">確認しながら</span><span class="bb">利用します。</span></p>
   </div>
 </section>
 
 <section class="section white" id="role">
   <div class="wrap">
-    <p class="kicker">Your role</p>
-    <h2><span class="bb">一次代理店は、</span><span class="bb">地域に</span><span class="bb">広げる</span><span class="bb">担い手。</span></h2>
-    <p class="lead"><span class="bb">企業との</span><span class="bb">出会いを</span><span class="bb">つくり、</span><span class="bb">導入を</span><span class="bb">支え、</span><span class="bb">継続利用を</span><span class="bb">支援する。</span><span class="bb">さらに</span><span class="bb">二次代理店を</span><span class="bb">迎え、</span><span class="bb">地域へ</span><span class="bb">届ける</span><span class="bb">仲間を</span><span class="bb">育てます。</span></p>
+    <p class="kicker" data-r>Your role</p>
+    <h2 data-r><span class="bb">一次代理店は、</span><span class="bb">地域に</span><span class="bb">広げる</span><span class="bb">担い手。</span></h2>
+    <p class="lead" data-r><span class="bb">企業との</span><span class="bb">出会いを</span><span class="bb">つくり、</span><span class="bb">導入を</span><span class="bb">支え、</span><span class="bb">継続利用を</span><span class="bb">支援する。</span><span class="bb">さらに</span><span class="bb">二次代理店を</span><span class="bb">迎え、</span><span class="bb">地域へ</span><span class="bb">届ける</span><span class="bb">仲間を</span><span class="bb">育てます。</span></p>
     <div class="steps">
-      <article><span class="num">01</span><h3><span class="bb">企業へ</span><span class="bb">伝える</span></h3><p><span class="bb">経営者や</span><span class="bb">人事に、</span><span class="bb">社員の</span><span class="bb">人生支援という</span><span class="bb">選択肢を</span><span class="bb">届ける。</span></p></article>
-      <article><span class="num">02</span><h3><span class="bb">課題を</span><span class="bb">聞く</span></h3><p><span class="bb">会社の</span><span class="bb">想いを</span><span class="bb">聞き、</span><span class="bb">合う</span><span class="bb">導入方法を</span><span class="bb">本部と</span><span class="bb">確認する。</span></p></article>
-      <article><span class="num">03</span><h3><span class="bb">導入を</span><span class="bb">支える</span></h3><p><span class="bb">担当者、</span><span class="bb">初回案内、</span><span class="bb">利用開始の</span><span class="bb">準備を</span><span class="bb">一緒に</span><span class="bb">整える。</span></p></article>
-      <article><span class="num">04</span><h3><span class="bb">仲間を</span><span class="bb">育てる</span></h3><p><span class="bb">二次代理店を</span><span class="bb">紹介し、</span><span class="bb">活動や</span><span class="bb">導入後の</span><span class="bb">支援を</span><span class="bb">行う。</span></p></article>
+      <article data-r><span class="num">01</span><h3><span class="bb">企業へ</span><span class="bb">伝える</span></h3><p><span class="bb">経営者や</span><span class="bb">人事に、</span><span class="bb">社員の</span><span class="bb">人生支援という</span><span class="bb">選択肢を</span><span class="bb">届ける。</span></p></article>
+      <article data-r><span class="num">02</span><h3><span class="bb">課題を</span><span class="bb">聞く</span></h3><p><span class="bb">会社の</span><span class="bb">想いを</span><span class="bb">聞き、</span><span class="bb">合う</span><span class="bb">導入方法を</span><span class="bb">本部と</span><span class="bb">確認する。</span></p></article>
+      <article data-r><span class="num">03</span><h3><span class="bb">導入を</span><span class="bb">支える</span></h3><p><span class="bb">担当者、</span><span class="bb">初回案内、</span><span class="bb">利用開始の</span><span class="bb">準備を</span><span class="bb">一緒に</span><span class="bb">整える。</span></p></article>
+      <article data-r><span class="num">04</span><h3><span class="bb">仲間を</span><span class="bb">育てる</span></h3><p><span class="bb">二次代理店を</span><span class="bb">紹介し、</span><span class="bb">活動や</span><span class="bb">導入後の</span><span class="bb">支援を</span><span class="bb">行う。</span></p></article>
     </div>
   </div>
 </section>
 
 <section class="section" id="business">
   <div class="wrap">
-    <p class="kicker">Business model</p>
-    <h2><span class="bb">導入報酬と</span><span class="bb">継続報酬で、</span><br><span class="bb">地域に</span><span class="bb">届ける</span><span class="bb">事業を</span><span class="bb">育てる。</span></h2>
-    <p class="lead"><span class="bb">報酬が</span><span class="bb">導入と</span><span class="bb">継続に</span><span class="bb">連動する</span><span class="bb">条件案です。</span><span class="bb">獲得数や</span><span class="bb">契約継続に</span><span class="bb">よって</span><span class="bb">収入は</span><span class="bb">変わります。</span></p>
+    <p class="kicker" data-r>Business model</p>
+    <h2 data-r><span class="bb">導入報酬と</span><span class="bb">継続報酬で、</span><br><span class="bb">地域に</span><span class="bb">届ける</span><span class="bb">事業を</span><span class="bb">育てる。</span></h2>
+    <p class="lead" data-r><span class="bb">報酬が</span><span class="bb">導入と</span><span class="bb">継続に</span><span class="bb">連動する</span><span class="bb">条件案です。</span><span class="bb">獲得数や</span><span class="bb">契約継続に</span><span class="bb">よって</span><span class="bb">収入は</span><span class="bb">変わります。</span></p>
     <div class="economy">
-      <div class="price"><small><span class="bb">一次代理店の</span><span class="bb">参画費用</span></small><strong><span class="bb">200万円</span></strong><p><span class="bb">加盟金。</span><span class="bb">税別・条件案。</span><span class="bb">正式条件表で</span><span class="bb">確認。</span></p></div>
-      <div class="price light"><small><span class="bb">毎月の</span><span class="bb">固定費</span></small><strong><span class="bb">月10万円</span></strong><p><span class="bb">REALIZECLUB利用料5万円 +</span> <wbr><span class="bb">OSMA利用料5万円。</span><span class="bb">人件費・営業費等は</span><span class="bb">別途。</span></p></div>
+      <div class="price" data-r><small><span class="bb">一次代理店の</span><span class="bb">参画費用</span></small><strong><span class="bb">200万円</span></strong><p><span class="bb">加盟金。</span><span class="bb">税別・条件案。</span><span class="bb">正式条件表で</span><span class="bb">確認。</span></p></div>
+      <div class="price light" data-r><small><span class="bb">毎月の</span><span class="bb">固定費</span></small><strong><span class="bb">月10万円</span></strong><p><span class="bb">REALIZECLUB利用料5万円 +</span> <wbr><span class="bb">OSMA利用料5万円。</span><span class="bb">人件費・営業費等は</span><span class="bb">別途。</span></p></div>
     </div>
-    <div class="table-wrap">
+    <div class="table-wrap" data-r>
       <table>
         <thead><tr><th scope="col"><span class="bb">報酬の</span><span class="bb">入口</span></th><th scope="col"><span class="bb">一次代理店への</span><span class="bb">報酬案</span></th><th scope="col"><span class="bb">内容</span></th></tr></thead>
         <tbody>
@@ -298,7 +313,7 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
         </tbody>
       </table>
     </div>
-    <div class="example">
+    <div class="example" data-r>
       <h3><span class="bb">報酬の</span><span class="bb">試算例</span></h3>
       <dl class="calc">
         <div><dt><span class="bb">導入報酬</span><span class="bb">（一回）</span></dt><dd class="formula"><span class="bb">40万円 × 10社</span></dd><dd class="amount"><span class="bb">400万円</span></dd></div>
@@ -307,63 +322,100 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
       </dl>
       <p class="note"><span class="bb">10社すべての</span><span class="bb">導入と</span><span class="bb">契約継続、</span><span class="bb">報酬条件の</span><span class="bb">充足を</span><span class="bb">仮定した</span><span class="bb">単純計算です。</span><span class="bb">導入報酬は</span><span class="bb">一回のみ</span><span class="bb">発生し、</span><span class="bb">毎月</span><span class="bb">入り続ける</span><span class="bb">ものではありません。</span><span class="bb">月額報酬15万円から</span><span class="bb">月額固定費10万円を</span><span class="bb">差し引いた</span><span class="bb">単純差額は</span><span class="bb">月5万円ですが、</span><span class="bb">人件費・営業費・税などを</span><span class="bb">引く</span><span class="bb">前で、</span><span class="bb">利益や</span><span class="bb">手取りではありません。</span><span class="bb">参画費用200万円は</span><span class="bb">初年度に</span><span class="bb">別途かかります。</span></p>
     </div>
-    <p class="caution"><span class="bb">二次代理店の</span><span class="bb">参加条件案は</span><span class="bb">150万円 + 月額8万円です。</span><span class="bb">一次代理店が</span><span class="bb">紹介・育成し、</span><span class="bb">三次代理店は</span><span class="bb">対象外。</span><span class="bb">報酬の</span><span class="bb">発生・継続条件、</span><span class="bb">支払日、</span><span class="bb">税区分は</span><span class="bb">契約書・条件表を</span><span class="bb">優先します。</span><span class="bb">収入・利益は</span><span class="bb">保証されません。</span></p>
+    <p class="caution" data-r><span class="bb">二次代理店の</span><span class="bb">参加条件案は</span><span class="bb">150万円 + 月額8万円です。</span><span class="bb">一次代理店が</span><span class="bb">紹介・育成し、</span><span class="bb">三次代理店は</span><span class="bb">対象外。</span><span class="bb">報酬の</span><span class="bb">発生・継続条件、</span><span class="bb">支払日、</span><span class="bb">税区分は</span><span class="bb">契約書・条件表を</span><span class="bb">優先します。</span><span class="bb">収入・利益は</span><span class="bb">保証されません。</span></p>
   </div>
 </section>
 
 <section class="section dark" id="children">
   <div class="wrap">
-    <p class="kicker">Why children</p>
-    <h2><span class="bb">大人が</span><span class="bb">学び、</span><span class="bb">話し、</span><span class="bb">選ぶ姿が、</span><br><span class="bb">子どもたちの</span><span class="bb">希望に</span><span class="bb">なる。</span></h2>
-    <p class="lead"><span class="bb">私たちが</span><span class="bb">目指すのは、</span><span class="bb">困った</span><span class="bb">ときだけ</span><span class="bb">誰かに</span><span class="bb">任せる</span><span class="bb">社会ではなく、</span><span class="bb">困る</span><span class="bb">前に</span><span class="bb">学び、</span><span class="bb">家族で</span><span class="bb">話し、</span><span class="bb">必要なら</span><span class="bb">相談できる</span><span class="bb">社会です。</span></p>
+    <p class="kicker" data-r>Why children</p>
+    <h2 data-r><span class="bb">大人が</span><span class="bb">学び、</span><span class="bb">話し、</span><span class="bb">選ぶ姿が、</span><br><span class="bb">子どもたちの</span><span class="bb">希望に</span><span class="bb">なる。</span></h2>
+    <p class="lead" data-r><span class="bb">私たちが</span><span class="bb">目指すのは、</span><span class="bb">困った</span><span class="bb">ときだけ</span><span class="bb">誰かに</span><span class="bb">任せる</span><span class="bb">社会ではなく、</span><span class="bb">困る</span><span class="bb">前に</span><span class="bb">学び、</span><span class="bb">家族で</span><span class="bb">話し、</span><span class="bb">必要なら</span><span class="bb">相談できる</span><span class="bb">社会です。</span></p>
     <div class="steps">
-      <article><span class="num">01</span><h3><span class="bb">大人が</span><span class="bb">知る</span></h3><p><span class="bb">人生の</span><span class="bb">選択肢と</span><span class="bb">備えを</span><span class="bb">学ぶ。</span></p></article>
-      <article><span class="num">02</span><h3><span class="bb">家族で</span><span class="bb">話す</span></h3><p><span class="bb">不安や</span><span class="bb">願いを</span><span class="bb">言葉に</span><span class="bb">する。</span></p></article>
-      <article><span class="num">03</span><h3><span class="bb">支えに</span><span class="bb">つながる</span></h3><p><span class="bb">ひとりに</span><span class="bb">なる</span><span class="bb">前に</span><span class="bb">相談する。</span></p></article>
-      <article><span class="num">04</span><h3><span class="bb">子どもへ</span><span class="bb">伝わる</span></h3><p><span class="bb">未来を</span><span class="bb">考えて</span><span class="bb">よいという</span><span class="bb">思いを</span><span class="bb">見せる。</span></p></article>
+      <article data-r><span class="num">01</span><h3><span class="bb">大人が</span><span class="bb">知る</span></h3><p><span class="bb">人生の</span><span class="bb">選択肢と</span><span class="bb">備えを</span><span class="bb">学ぶ。</span></p></article>
+      <article data-r><span class="num">02</span><h3><span class="bb">家族で</span><span class="bb">話す</span></h3><p><span class="bb">不安や</span><span class="bb">願いを</span><span class="bb">言葉に</span><span class="bb">する。</span></p></article>
+      <article data-r><span class="num">03</span><h3><span class="bb">支えに</span><span class="bb">つながる</span></h3><p><span class="bb">ひとりに</span><span class="bb">なる</span><span class="bb">前に</span><span class="bb">相談する。</span></p></article>
+      <article data-r><span class="num">04</span><h3><span class="bb">子どもへ</span><span class="bb">伝わる</span></h3><p><span class="bb">未来を</span><span class="bb">考えて</span><span class="bb">よいという</span><span class="bb">思いを</span><span class="bb">見せる。</span></p></article>
     </div>
-    <blockquote class="quote"><p><span class="bb">「この</span><span class="bb">会社で</span><span class="bb">働いて、</span><span class="bb">人生まで</span><span class="bb">よくなった」</span></p></blockquote>
-    <p class="caution"><span class="bb">子どもたちの</span><span class="bb">未来は、</span><span class="bb">私たちが</span><span class="bb">実現したい</span><span class="bb">願いです。</span><span class="bb">社会課題の</span><span class="bb">解決を</span><span class="bb">確約する</span><span class="bb">ことや、</span><span class="bb">導入効果を</span><span class="bb">保証する</span><span class="bb">表現ではありません。</span></p>
+    <blockquote class="quote" data-r><p><span class="bb">「この</span><span class="bb">会社で</span><span class="bb">働いて、</span><span class="bb">人生まで</span><span class="bb">よくなった」</span></p></blockquote>
+    <p class="caution" data-r><span class="bb">子どもたちの</span><span class="bb">未来は、</span><span class="bb">私たちが</span><span class="bb">実現したい</span><span class="bb">願いです。</span><span class="bb">社会課題の</span><span class="bb">解決を</span><span class="bb">確約する</span><span class="bb">ことや、</span><span class="bb">導入効果を</span><span class="bb">保証する</span><span class="bb">表現ではありません。</span></p>
   </div>
 </section>
 
 <section class="section" id="seek">
   <div class="wrap">
-    <p class="kicker">Who we seek</p>
-    <h2><span class="bb">人との</span><span class="bb">信頼を、</span><span class="bb">地域の</span><span class="bb">仕事に</span><span class="bb">育てたい方へ。</span></h2>
+    <p class="kicker" data-r>Who we seek</p>
+    <h2 data-r><span class="bb">人との</span><span class="bb">信頼を、</span><span class="bb">地域の</span><span class="bb">仕事に</span><span class="bb">育てたい方へ。</span></h2>
     <div class="fit">
-      <div><h3><span class="bb">向いている</span><span class="bb">方</span></h3><p><span class="bb">経営者や</span><span class="bb">人事担当者との</span><span class="bb">接点が</span><span class="bb">ある。</span><span class="bb">相手の</span><span class="bb">話を</span><span class="bb">よく</span><span class="bb">聞き、</span><span class="bb">必要な</span><span class="bb">人へ</span><span class="bb">丁寧に</span><span class="bb">つなぐ。</span><span class="bb">地域で</span><span class="bb">長く</span><span class="bb">信頼を</span><span class="bb">育てたい。</span></p></div>
-      <div><h3><span class="bb">本部が</span><span class="bb">支える</span><span class="bb">こと</span></h3><p><span class="bb">商品説明、</span><span class="bb">導入手順、</span><span class="bb">提案資料、</span><span class="bb">運用設計を</span><span class="bb">支援します。</span><span class="bb">条件が</span><span class="bb">曖昧なまま</span><span class="bb">約束せず、</span><span class="bb">案件ごとに</span><span class="bb">確認して</span><span class="bb">進めます。</span></p></div>
+      <div data-r><h3><span class="bb">向いている</span><span class="bb">方</span></h3><p><span class="bb">経営者や</span><span class="bb">人事担当者との</span><span class="bb">接点が</span><span class="bb">ある。</span><span class="bb">相手の</span><span class="bb">話を</span><span class="bb">よく</span><span class="bb">聞き、</span><span class="bb">必要な</span><span class="bb">人へ</span><span class="bb">丁寧に</span><span class="bb">つなぐ。</span><span class="bb">地域で</span><span class="bb">長く</span><span class="bb">信頼を</span><span class="bb">育てたい。</span></p></div>
+      <div data-r><h3><span class="bb">本部が</span><span class="bb">支える</span><span class="bb">こと</span></h3><p><span class="bb">商品説明、</span><span class="bb">導入手順、</span><span class="bb">提案資料、</span><span class="bb">運用設計を</span><span class="bb">支援します。</span><span class="bb">条件が</span><span class="bb">曖昧なまま</span><span class="bb">約束せず、</span><span class="bb">案件ごとに</span><span class="bb">確認して</span><span class="bb">進めます。</span></p></div>
     </div>
     <div class="steps three">
-      <article><span class="num">1〜30日</span><h3><span class="bb">自社で</span><span class="bb">知る</span></h3><p><span class="bb">サービスを</span><span class="bb">体験し、</span><span class="bb">担当者と</span><span class="bb">候補企業を</span><span class="bb">整理。</span></p></article>
-      <article><span class="num">31〜60日</span><h3><span class="bb">最初の</span><span class="bb">対話</span></h3><p><span class="bb">経営者に</span><span class="bb">提案し、</span><span class="bb">課題と</span><span class="bb">導入条件を</span><span class="bb">確認。</span></p></article>
-      <article><span class="num">61〜90日</span><h3><span class="bb">導入準備</span></h3><p><span class="bb">合意後に</span><span class="bb">初期設定、</span><span class="bb">社員案内、</span><span class="bb">利用開始を</span><span class="bb">進める。</span></p></article>
+      <article data-r><span class="num">1〜30日</span><h3><span class="bb">自社で</span><span class="bb">知る</span></h3><p><span class="bb">サービスを</span><span class="bb">体験し、</span><span class="bb">担当者と</span><span class="bb">候補企業を</span><span class="bb">整理。</span></p></article>
+      <article data-r><span class="num">31〜60日</span><h3><span class="bb">最初の</span><span class="bb">対話</span></h3><p><span class="bb">経営者に</span><span class="bb">提案し、</span><span class="bb">課題と</span><span class="bb">導入条件を</span><span class="bb">確認。</span></p></article>
+      <article data-r><span class="num">61〜90日</span><h3><span class="bb">導入準備</span></h3><p><span class="bb">合意後に</span><span class="bb">初期設定、</span><span class="bb">社員案内、</span><span class="bb">利用開始を</span><span class="bb">進める。</span></p></article>
     </div>
   </div>
 </section>
 
 <section class="final" id="first-step">
   <div class="wrap">
-    <p class="eyebrow">FOUNDING PARTNER / 創設一次代理店</p>
-    <h2><span class="bb">人生支援を、</span><span class="bb">地域から</span><span class="bb">届ける</span><span class="bb">仲間へ。</span></h2>
-    <p><span class="bb">まずは、</span><span class="bb">事業の</span><span class="bb">内容・</span><span class="bb">活動・費用・報酬条件を</span><span class="bb">一緒に</span><span class="bb">確認しませんか。</span><span class="bb">正式条件を</span><span class="bb">確認し、</span><span class="bb">ご自身に</span><span class="bb">合うか</span><span class="bb">考えていただけます。</span></p>
-    <a class="cta" href="https://liff.line.me/2011299304-9aMpCJVv/salon/dateselector/week/2026/9/27?liff_id=2011299304-9aMpCJVv&amp;is=0tYlk1UdbC" target="_blank" rel="noopener"><span class="bb">説明を</span><span class="bb">聞きたい</span></a>
-    <p class="howto" id="howto" tabindex="-1"><span class="bb">この</span><span class="bb">ページを</span><span class="bb">案内した</span><span class="bb">方へ</span><span class="bb">「Founding Partnerの</span><span class="bb">説明を</span><span class="bb">聞きたい」と</span><span class="bb">お伝えください。</span><br><span class="bb">報酬・費用は</span><span class="bb">条件案です。</span><span class="bb">契約書・条件表で</span><span class="bb">最終確認してください。</span></p>
+    <p class="eyebrow" data-r>FOUNDING PARTNER / 創設一次代理店</p>
+    <h2 data-r><span class="bb">人生支援を、</span><span class="bb">地域から</span><span class="bb">届ける</span><span class="bb">仲間へ。</span></h2>
+    <p data-r><span class="bb">まずは、</span><span class="bb">事業の</span><span class="bb">内容・</span><span class="bb">活動・費用・報酬条件を</span><span class="bb">一緒に</span><span class="bb">確認しませんか。</span><span class="bb">正式条件を</span><span class="bb">確認し、</span><span class="bb">ご自身に</span><span class="bb">合うか</span><span class="bb">考えていただけます。</span></p>
+    <a class="cta" data-r href="https://liff.line.me/2011299304-9aMpCJVv/salon/dateselector/week/2026/9/27?liff_id=2011299304-9aMpCJVv&amp;is=0tYlk1UdbC" target="_blank" rel="noopener"><span class="bb">説明を</span><span class="bb">聞きたい</span></a>
+    <p class="howto" data-r id="howto" tabindex="-1"><span class="bb">この</span><span class="bb">ページを</span><span class="bb">案内した</span><span class="bb">方へ</span><span class="bb">「Founding Partnerの</span><span class="bb">説明を</span><span class="bb">聞きたい」と</span><span class="bb">お伝えください。</span><br><span class="bb">報酬・費用は</span><span class="bb">条件案です。</span><span class="bb">契約書・条件表で</span><span class="bb">最終確認してください。</span></p>
   </div>
 </section>
 
 </main>
 
 <footer class="footer">
-  <p class="f-lead"><span class="bb">REALIZECLUB / REALIZE OS</span><br><span class="bb">すべては、</span><span class="bb">100年後の</span><span class="bb">子どもたちへ。</span></p>
-  <address class="f-info">
+  <p class="f-lead" data-r><span class="bb">REALIZECLUB / REALIZE OS</span><br><span class="bb">すべては、</span><span class="bb">100年後の</span><span class="bb">子どもたちへ。</span></p>
+  <address class="f-info" data-r>
     <span class="f-name"><span class="bb">日本リアライズ株式会社</span></span>
     <span><span class="bb">東京都新宿区新宿1-36-7</span> <span class="bb">新宿内野ビルⅡ8階</span></span>
     <span class="f-contact"><a href="tel:0363805978"><span class="bb">TEL 03-6380-5978</span></a><a href="mailto:RC@n-realize.co.jp"><span class="bb">RC@n-realize.co.jp</span></a></span>
   </address>
 </footer>
 <a class="cta mobile-cta" href="https://liff.line.me/2011299304-9aMpCJVv/salon/dateselector/week/2026/9/27?liff_id=2011299304-9aMpCJVv&amp;is=0tYlk1UdbC" target="_blank" rel="noopener"><span class="bb">Founding Partnerの</span><span class="bb">説明を</span><span class="bb">聞く</span></a>
+<script>
+/* スクロールに合わせて一度だけ表示する。戻ってもやり直さない。 */
+(function () {
+  var root = document.documentElement;
+  if (root.className.indexOf('anim') === -1) { return; }
+  var items = [].slice.call(document.querySelectorAll('[data-r]'));
+
+  /* 同じ並びの中だけ少しずつ遅らせる（最大280ms） */
+  var groups = [];
+  items.forEach(function (el) {
+    var g = groups.filter(function (x) { return x.parent === el.parentElement; })[0];
+    if (!g) { g = { parent: el.parentElement, list: [] }; groups.push(g); }
+    g.list.push(el);
+  });
+  groups.forEach(function (g) {
+    g.list.forEach(function (el, i) {
+      el.style.transitionDelay = Math.min(i * 70, 280) + 'ms';
+    });
+  });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0 });
+  items.forEach(function (el) { io.observe(el); });
+
+  /* ヘッダーは少しスクロールしたら影をつける */
+  var top = document.querySelector('.top');
+  var onScroll = function () {
+    if (window.scrollY === 0) { top.classList.remove('scrolled'); }
+    else { top.classList.add('scrolled'); }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
 <script>
 /* LINEの日程調整URLに埋まっている週（/week/YYYY/M/D）を、開いた日に差し替える。
    失敗したら何もせず、HTMLに書いてある日付のまま使う。 */
