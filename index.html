@@ -129,8 +129,22 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
 
 .example{margin-top:30px;padding:30px;background:var(--deep);color:#fff;border-radius:14px}
 .example h3{margin:0 0 10px;color:#e3c991;font-size:17px}
-.example .big{font-size:clamp(22px,3.2vw,38px);font-weight:800;line-height:1.45;font-variant-numeric:tabular-nums;margin:0}
-.example .note{color:#d4e0d8;max-width:46em;font-size:14.5px;margin:14px 0 0}
+.example .note{color:#d4e0d8;max-width:46em;font-size:14.5px;margin:18px 0 0}
+.calc{margin:0;display:grid;gap:2px}
+.calc>div{display:grid;grid-template-columns:13em 1fr auto;align-items:baseline;gap:16px;
+  padding:14px 0;border-top:1px solid #2b4a3d}
+.calc>div:first-child{border-top:0}
+.calc dt{font-size:14.5px;color:#cfdcd4}
+.calc dd{margin:0}
+.calc .formula{font-size:14.5px;color:#9fb5a9;font-variant-numeric:tabular-nums}
+.calc .amount{font-size:clamp(22px,2.8vw,32px);font-weight:800;color:#e3c991;
+  font-variant-numeric:tabular-nums;justify-self:end}
+@media(max-width:600px){
+  .calc>div{grid-template-columns:1fr auto;gap:2px 12px}
+  .calc dt{grid-column:1;font-weight:700;color:#fff}
+  .calc .formula{grid-column:1;grid-row:2}
+  .calc .amount{grid-column:2;grid-row:1/3;align-self:center}
+}
 
 /* ---------- quote / fit ---------- */
 .quote{margin:34px 0 0;padding:34px 36px;background:var(--mint);border-radius:14px;
@@ -148,7 +162,14 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
 .final p{color:#d8e3dc;max-width:40em}
 .howto{margin-top:30px;padding:22px 24px;border:1px solid #33564a;border-radius:12px;background:#0d2219;
   font-size:14px;color:#dfe9e3;line-height:1.9;max-width:44em;scroll-margin-top:90px}
-.footer{padding:26px 20px;color:#b9c8bf;background:#0b1f18;text-align:center;font-size:12.5px;line-height:2}
+.footer{padding:34px 20px 30px;color:#b9c8bf;background:#0b1f18;text-align:center;font-size:12.5px;line-height:2}
+.footer p,.footer address{margin:0}
+.f-info{font-style:normal;margin-top:18px;padding-top:18px;border-top:1px solid #1d3a30;
+  display:grid;gap:2px;font-size:12.5px;color:#a7b9af}
+.f-info span{display:block}
+.f-name{font-weight:700;color:#d6e2da}
+.f-info a{color:#cbb98f}
+.f-contact{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 18px}
 .mobile-cta{display:none}
 
 /* ---------- mobile ---------- */
@@ -205,9 +226,9 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
   <div class="hero-inner">
     <p class="eyebrow">創設一次代理店 / FOUNDING PARTNER</p>
     <h1><span class="bb">社長の</span><span class="bb">想いを、</span><br><span class="bb">社員と</span><span class="bb">家族の</span><span class="bb">暮らしへ。</span></h1>
-    <p><span class="bb">人生支援を、</span><span class="bb">地域の</span><span class="bb">企業へ</span><span class="bb">届ける。</span><span class="bb">REALIZECLUBの</span><span class="bb">創設一次代理店と</span><span class="bb">して、</span><span class="bb">会社から</span><span class="bb">始まる</span><span class="bb">学びと</span><span class="bb">相談の</span><span class="bb">環境を</span><span class="bb">一緒に</span><span class="bb">つくる</span><span class="bb">仲間を</span><span class="bb">募集します。</span><span class="bb">今回の</span><span class="bb">募集枠は</span><span class="bb">20社、</span><span class="bb">法人</span><span class="bb">対象・審査制です。</span></p>
+    <p><span class="bb">人生支援を、</span><span class="bb">地域の</span><span class="bb">企業へ</span><span class="bb">届ける。</span><span class="bb">REALIZECLUBの</span><span class="bb">創設一次代理店として、</span><span class="bb">会社から</span><span class="bb">始まる</span><span class="bb">学びと</span><span class="bb">相談の</span><span class="bb">環境を</span><span class="bb">一緒に</span><span class="bb">つくる</span><span class="bb">仲間を</span><span class="bb">募集します。</span><span class="bb">今回の</span><span class="bb">募集枠は</span><span class="bb">20社、</span><span class="bb">法人</span><span class="bb">対象・審査制です。</span></p>
     <a class="cta" href="#role"><span class="bb">Founding Partnerの</span><span class="bb">役割を</span><span class="bb">見る</span></a>
-    <p class="caption"><span class="bb">すべては、</span><span class="bb">100年後の</span><span class="bb">子ども</span><span class="bb">たちへ。</span></p>
+    <p class="caption"><span class="bb">すべては、</span><span class="bb">100年後の</span><span class="bb">子どもたちへ。</span></p>
   </div>
 </section>
 
@@ -249,7 +270,7 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
     <h2><span class="bb">一次代理店は、</span><span class="bb">地域に</span><span class="bb">広げる</span><span class="bb">担い手。</span></h2>
     <p class="lead"><span class="bb">企業との</span><span class="bb">出会いを</span><span class="bb">つくり、</span><span class="bb">導入を</span><span class="bb">支え、</span><span class="bb">継続利用を</span><span class="bb">支援する。</span><span class="bb">さらに</span><span class="bb">二次代理店を</span><span class="bb">迎え、</span><span class="bb">地域へ</span><span class="bb">届ける</span><span class="bb">仲間を</span><span class="bb">育てます。</span></p>
     <div class="steps">
-      <article><span class="num">01</span><h3><span class="bb">企業へ</span><span class="bb">伝える</span></h3><p><span class="bb">経営者や</span><span class="bb">人事に、</span><span class="bb">社員の</span><span class="bb">人生支援と</span><span class="bb">いう</span><span class="bb">選択肢を</span><span class="bb">届ける。</span></p></article>
+      <article><span class="num">01</span><h3><span class="bb">企業へ</span><span class="bb">伝える</span></h3><p><span class="bb">経営者や</span><span class="bb">人事に、</span><span class="bb">社員の</span><span class="bb">人生支援という</span><span class="bb">選択肢を</span><span class="bb">届ける。</span></p></article>
       <article><span class="num">02</span><h3><span class="bb">課題を</span><span class="bb">聞く</span></h3><p><span class="bb">会社の</span><span class="bb">想いを</span><span class="bb">聞き、</span><span class="bb">合う</span><span class="bb">導入方法を</span><span class="bb">本部と</span><span class="bb">確認する。</span></p></article>
       <article><span class="num">03</span><h3><span class="bb">導入を</span><span class="bb">支える</span></h3><p><span class="bb">担当者、</span><span class="bb">初回案内、</span><span class="bb">利用開始の</span><span class="bb">準備を</span><span class="bb">一緒に</span><span class="bb">整える。</span></p></article>
       <article><span class="num">04</span><h3><span class="bb">仲間を</span><span class="bb">育てる</span></h3><p><span class="bb">二次代理店を</span><span class="bb">紹介し、</span><span class="bb">活動や</span><span class="bb">導入後の</span><span class="bb">支援を</span><span class="bb">行う。</span></p></article>
@@ -264,7 +285,7 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
     <p class="lead"><span class="bb">報酬が</span><span class="bb">導入と</span><span class="bb">継続に</span><span class="bb">連動する</span><span class="bb">条件案です。</span><span class="bb">獲得数や</span><span class="bb">契約継続に</span><span class="bb">よって</span><span class="bb">収入は</span><span class="bb">変わります。</span></p>
     <div class="economy">
       <div class="price"><small><span class="bb">一次代理店の</span><span class="bb">参画費用</span></small><strong><span class="bb">200万円</span></strong><p><span class="bb">加盟金。</span><span class="bb">税別・条件案。</span><span class="bb">正式条件表で</span><span class="bb">確認。</span></p></div>
-      <div class="price light"><small><span class="bb">毎月の</span><span class="bb">固定費</span></small><strong><span class="bb">月10万円</span></strong><p><span class="bb">REALIZECLUB利用料5万円 + OSMA利用料5万円。</span><span class="bb">人件費・営業費等は</span><span class="bb">別途。</span></p></div>
+      <div class="price light"><small><span class="bb">毎月の</span><span class="bb">固定費</span></small><strong><span class="bb">月10万円</span></strong><p><span class="bb">REALIZECLUB利用料5万円 +</span> <wbr><span class="bb">OSMA利用料5万円。</span><span class="bb">人件費・営業費等は</span><span class="bb">別途。</span></p></div>
     </div>
     <div class="table-wrap">
       <table>
@@ -278,9 +299,13 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
       </table>
     </div>
     <div class="example">
-      <h3><span class="bb">月額収入の</span><span class="bb">試算例</span></h3>
-      <p class="big"><span class="bb">継続導入10社</span> <span class="bb">× 1.5万円</span> <span class="bb">= 月15万円</span></p>
-      <p class="note"><span class="bb">10社すべての</span><span class="bb">契約継続と</span><span class="bb">報酬条件の</span><span class="bb">充足を</span><span class="bb">仮定した</span><span class="bb">月額報酬の</span><span class="bb">単純計算です。</span><span class="bb">月額固定費10万円を</span><span class="bb">差し引いた</span><span class="bb">単純差額は</span><span class="bb">5万円ですが、</span><span class="bb">人件費・営業費・税などを</span><span class="bb">引く</span><span class="bb">前で、</span><span class="bb">利益や</span><span class="bb">手取りではありません。</span></p>
+      <h3><span class="bb">報酬の</span><span class="bb">試算例</span></h3>
+      <dl class="calc">
+        <div><dt><span class="bb">導入報酬</span><span class="bb">（一回）</span></dt><dd class="formula"><span class="bb">40万円 × 10社</span></dd><dd class="amount"><span class="bb">400万円</span></dd></div>
+        <div><dt><span class="bb">継続報酬</span><span class="bb">（毎月）</span></dt><dd class="formula"><span class="bb">1.5万円 × 10社</span></dd><dd class="amount"><span class="bb">月15万円</span></dd></div>
+        <div><dt><span class="bb">月額固定費を</span><span class="bb">引くと</span></dt><dd class="formula"><span class="bb">月15万円 − 月10万円</span></dd><dd class="amount"><span class="bb">月5万円</span></dd></div>
+      </dl>
+      <p class="note"><span class="bb">10社すべての</span><span class="bb">導入と</span><span class="bb">契約継続、</span><span class="bb">報酬条件の</span><span class="bb">充足を</span><span class="bb">仮定した</span><span class="bb">単純計算です。</span><span class="bb">導入報酬は</span><span class="bb">一回のみ</span><span class="bb">発生し、</span><span class="bb">毎月</span><span class="bb">入り続ける</span><span class="bb">ものではありません。</span><span class="bb">月額報酬15万円から</span><span class="bb">月額固定費10万円を</span><span class="bb">差し引いた</span><span class="bb">単純差額は</span><span class="bb">月5万円ですが、</span><span class="bb">人件費・営業費・税などを</span><span class="bb">引く</span><span class="bb">前で、</span><span class="bb">利益や</span><span class="bb">手取りではありません。</span><span class="bb">参画費用200万円は</span><span class="bb">初年度に</span><span class="bb">別途かかります。</span></p>
     </div>
     <p class="caution"><span class="bb">二次代理店の</span><span class="bb">参加条件案は</span><span class="bb">150万円 + 月額8万円です。</span><span class="bb">一次代理店が</span><span class="bb">紹介・育成し、</span><span class="bb">三次代理店は</span><span class="bb">対象外。</span><span class="bb">報酬の</span><span class="bb">発生・継続条件、</span><span class="bb">支払日、</span><span class="bb">税区分は</span><span class="bb">契約書・条件表を</span><span class="bb">優先します。</span><span class="bb">収入・利益は</span><span class="bb">保証されません。</span></p>
   </div>
@@ -289,16 +314,16 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
 <section class="section dark" id="children">
   <div class="wrap">
     <p class="kicker">Why children</p>
-    <h2><span class="bb">大人が</span><span class="bb">学び、</span><span class="bb">話し、</span><span class="bb">選ぶ姿が、</span><br><span class="bb">子ども</span><span class="bb">たちの</span><span class="bb">希望に</span><span class="bb">なる。</span></h2>
+    <h2><span class="bb">大人が</span><span class="bb">学び、</span><span class="bb">話し、</span><span class="bb">選ぶ姿が、</span><br><span class="bb">子どもたちの</span><span class="bb">希望に</span><span class="bb">なる。</span></h2>
     <p class="lead"><span class="bb">私たちが</span><span class="bb">目指すのは、</span><span class="bb">困った</span><span class="bb">ときだけ</span><span class="bb">誰かに</span><span class="bb">任せる</span><span class="bb">社会ではなく、</span><span class="bb">困る</span><span class="bb">前に</span><span class="bb">学び、</span><span class="bb">家族で</span><span class="bb">話し、</span><span class="bb">必要なら</span><span class="bb">相談できる</span><span class="bb">社会です。</span></p>
     <div class="steps">
       <article><span class="num">01</span><h3><span class="bb">大人が</span><span class="bb">知る</span></h3><p><span class="bb">人生の</span><span class="bb">選択肢と</span><span class="bb">備えを</span><span class="bb">学ぶ。</span></p></article>
       <article><span class="num">02</span><h3><span class="bb">家族で</span><span class="bb">話す</span></h3><p><span class="bb">不安や</span><span class="bb">願いを</span><span class="bb">言葉に</span><span class="bb">する。</span></p></article>
       <article><span class="num">03</span><h3><span class="bb">支えに</span><span class="bb">つながる</span></h3><p><span class="bb">ひとりに</span><span class="bb">なる</span><span class="bb">前に</span><span class="bb">相談する。</span></p></article>
-      <article><span class="num">04</span><h3><span class="bb">子ども</span><span class="bb">へ</span><span class="bb">伝わる</span></h3><p><span class="bb">未来を</span><span class="bb">考えて</span><span class="bb">よいと</span><span class="bb">いう</span><span class="bb">思いを</span><span class="bb">見せる。</span></p></article>
+      <article><span class="num">04</span><h3><span class="bb">子どもへ</span><span class="bb">伝わる</span></h3><p><span class="bb">未来を</span><span class="bb">考えて</span><span class="bb">よいという</span><span class="bb">思いを</span><span class="bb">見せる。</span></p></article>
     </div>
     <blockquote class="quote"><p><span class="bb">「この</span><span class="bb">会社で</span><span class="bb">働いて、</span><span class="bb">人生まで</span><span class="bb">よくなった」</span></p></blockquote>
-    <p class="caution"><span class="bb">子ども</span><span class="bb">たちの</span><span class="bb">未来は、</span><span class="bb">私たちが</span><span class="bb">実現したい</span><span class="bb">願いです。</span><span class="bb">社会課題の</span><span class="bb">解決を</span><span class="bb">確約する</span><span class="bb">ことや、</span><span class="bb">導入効果を</span><span class="bb">保証する</span><span class="bb">表現ではありません。</span></p>
+    <p class="caution"><span class="bb">子どもたちの</span><span class="bb">未来は、</span><span class="bb">私たちが</span><span class="bb">実現したい</span><span class="bb">願いです。</span><span class="bb">社会課題の</span><span class="bb">解決を</span><span class="bb">確約する</span><span class="bb">ことや、</span><span class="bb">導入効果を</span><span class="bb">保証する</span><span class="bb">表現ではありません。</span></p>
   </div>
 </section>
 
@@ -323,14 +348,21 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
     <p class="eyebrow">FOUNDING PARTNER / 創設一次代理店</p>
     <h2><span class="bb">人生支援を、</span><span class="bb">地域から</span><span class="bb">届ける</span><span class="bb">仲間へ。</span></h2>
     <p><span class="bb">まずは、</span><span class="bb">事業の</span><span class="bb">内容・</span><span class="bb">活動・費用・報酬条件を</span><span class="bb">一緒に</span><span class="bb">確認しませんか。</span><span class="bb">正式条件を</span><span class="bb">確認し、</span><span class="bb">ご自身に</span><span class="bb">合うか</span><span class="bb">考えていただけます。</span></p>
-    <a class="cta" href="#howto"><span class="bb">説明を</span><span class="bb">聞きたい</span></a>
+    <a class="cta" href="https://liff.line.me/2011299304-9aMpCJVv/salon/dateselector/week/2026/9/27?liff_id=2011299304-9aMpCJVv&amp;is=0tYlk1UdbC" target="_blank" rel="noopener"><span class="bb">説明を</span><span class="bb">聞きたい</span></a>
     <p class="howto" id="howto" tabindex="-1"><span class="bb">この</span><span class="bb">ページを</span><span class="bb">案内した</span><span class="bb">方へ</span><span class="bb">「Founding Partnerの</span><span class="bb">説明を</span><span class="bb">聞きたい」と</span><span class="bb">お伝えください。</span><br><span class="bb">報酬・費用は</span><span class="bb">条件案です。</span><span class="bb">契約書・条件表で</span><span class="bb">最終確認してください。</span></p>
   </div>
 </section>
 
 </main>
 
-<footer class="footer"><span class="bb">REALIZECLUB / REALIZE OS</span><br><span class="bb">すべては、</span><span class="bb">100年後の</span><span class="bb">子ども</span><span class="bb">たちへ。</span></footer>
-<a class="cta mobile-cta" href="#first-step"><span class="bb">Founding Partnerの</span><span class="bb">説明を</span><span class="bb">聞く</span></a>
+<footer class="footer">
+  <p class="f-lead"><span class="bb">REALIZECLUB / REALIZE OS</span><br><span class="bb">すべては、</span><span class="bb">100年後の</span><span class="bb">子どもたちへ。</span></p>
+  <address class="f-info">
+    <span class="f-name"><span class="bb">日本リアライズ株式会社</span></span>
+    <span><span class="bb">東京都新宿区新宿1-36-7</span> <span class="bb">新宿内野ビルⅡ8階</span></span>
+    <span class="f-contact"><a href="tel:0363805978"><span class="bb">TEL 03-6380-5978</span></a><a href="mailto:RC@n-realize.co.jp"><span class="bb">RC@n-realize.co.jp</span></a></span>
+  </address>
+</footer>
+<a class="cta mobile-cta" href="https://liff.line.me/2011299304-9aMpCJVv/salon/dateselector/week/2026/9/27?liff_id=2011299304-9aMpCJVv&amp;is=0tYlk1UdbC" target="_blank" rel="noopener"><span class="bb">Founding Partnerの</span><span class="bb">説明を</span><span class="bb">聞く</span></a>
 </body>
 </html>
