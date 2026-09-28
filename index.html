@@ -177,7 +177,20 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
 .final p{color:#d8e3dc;max-width:40em}
 .howto{margin-top:30px;padding:22px 24px;border:1px solid #33564a;border-radius:12px;background:#0d2219;
   font-size:14px;color:#dfe9e3;line-height:1.9;max-width:44em;scroll-margin-top:90px}
-.footer{padding:34px 20px 30px;color:#b9c8bf;background:#0b1f18;text-align:center;font-size:12.5px;line-height:2}
+.footer{padding:34px 20px 52px;color:#b9c8bf;background:#0b1f18;text-align:center;font-size:12.5px;line-height:2}
+
+/* ---------- 説明会へのボトムバー（PC・スマホ共通） ---------- */
+[hidden]{display:none!important}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:40;
+  background:rgba(11,31,24,.95);border-top:1px solid #24493c;
+  padding:12px 20px calc(12px + env(safe-area-inset-bottom));
+  transform:translateY(115%);visibility:hidden;
+  transition:transform .32s cubic-bezier(.22,.7,.28,1),visibility .32s}
+.bar.show{transform:none;visibility:visible}
+.bar-in{width:min(1080px,calc(100% - 8px));margin:auto;
+  display:flex;align-items:center;justify-content:space-between;gap:24px}
+.bar-text{margin:0;color:#d5e1da;font-size:14px;line-height:1.6}
+.bar .cta{margin:0;padding:14px 26px;min-height:50px}
 .footer p,.footer address{margin:0}
 .f-info{font-style:normal;margin-top:18px;padding-top:18px;border-top:1px solid #1d3a30;
   display:grid;gap:2px;font-size:12.5px;color:#a7b9af}
@@ -185,7 +198,6 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
 .f-name{font-weight:700;color:#d6e2da}
 .f-info a{color:#cbb98f}
 .f-contact{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 18px}
-.mobile-cta{display:none}
 
 /* ---------- mobile ---------- */
 @media(max-width:860px){
@@ -206,6 +218,10 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
   .section{padding:60px 0}
   .six{grid-template-columns:repeat(3,1fr)}
   .cta{width:100%}
+  .bar{padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+  .bar-text{display:none}
+  .bar .cta{width:100%;font-size:15px;padding:14px 12px}
+  .footer{padding-bottom:60px}
   /* 報酬表：横スクロールをやめてカード表示に */
   .table-wrap{border:0;background:transparent;overflow:visible}
   table,tbody,tr,td,th{display:block;width:100%}
@@ -215,15 +231,10 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
   tbody tr>*:last-child{border-bottom:0}
   tbody td::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:var(--coral);letter-spacing:.06em;margin-bottom:2px}
   tbody th{font-size:16px;background:transparent}
-  .mobile-cta{display:flex;position:fixed;z-index:40;left:12px;right:12px;width:auto;margin:0;
-    bottom:calc(12px + env(safe-area-inset-bottom));padding:15px 18px;min-height:54px;font-size:15px;
-    white-space:nowrap;box-shadow:0 6px 24px rgba(0,0,0,.34)}
-  .footer{padding-bottom:96px}
 }
 @media(max-width:420px){
   .steps,.steps.three{grid-template-columns:1fr}
   .six{grid-template-columns:repeat(2,1fr)}
-  .mobile-cta{font-size:14px;padding:14px 12px}
 }
 </style>
 </head>
@@ -378,7 +389,12 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
     <span class="f-contact"><a href="tel:0363805978"><span class="bb">TEL 03-6380-5978</span></a><a href="mailto:RC@n-realize.co.jp"><span class="bb">RC@n-realize.co.jp</span></a></span>
   </address>
 </footer>
-<a class="cta mobile-cta" href="https://liff.line.me/2011299304-9aMpCJVv/salon/dateselector/week/2026/9/27?liff_id=2011299304-9aMpCJVv&amp;is=0tYlk1UdbC" target="_blank" rel="noopener"><span class="bb">Founding Partnerの</span><span class="bb">説明を</span><span class="bb">聞く</span></a>
+<div class="bar">
+  <div class="bar-in">
+    <p class="bar-text"><span class="bb">今回の募集枠は20社、</span><span class="bb">法人対象・審査制です。</span></p>
+    <a class="cta bar-cta" href="https://liff.line.me/2011299304-9aMpCJVv/salon/dateselector/week/2026/9/27?liff_id=2011299304-9aMpCJVv&amp;is=0tYlk1UdbC" target="_blank" rel="noopener"><span class="bb">Founding Partnerの</span><span class="bb">説明を</span><span class="bb">聞く</span></a>
+  </div>
+</div>
 <script>
 /* スクロールに合わせて一度だけ表示する。戻ってもやり直さない。 */
 (function () {
@@ -406,13 +422,29 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0 });
   items.forEach(function (el) { io.observe(el); });
 
-  /* ヘッダーは少しスクロールしたら影をつける */
+  /* ヘッダーの影と、説明会へのボトムバーの出し入れ
+     ※ このファイルの JS では比較に「小なり」を書かない。
+        HTML のタグとして誤読されるため、必ず左右を入れ替えて「大なり」で書く。 */
   var top = document.querySelector('.top');
+  var bar = document.querySelector('.bar');
+  var hero = document.querySelector('.hero');
+  var fin = document.querySelector('#first-step');
+
   var onScroll = function () {
     if (window.scrollY === 0) { top.classList.remove('scrolled'); }
     else { top.classList.add('scrolled'); }
+
+    if (!bar || !hero || !fin) { return; }
+    /* ヒーローを過ぎてから出す */
+    var passedHero = window.scrollY + 80 - hero.offsetHeight >= 0;
+    /* 最後の申し込みセクションが見えている間は引っ込める（ボタンの二重表示を避ける） */
+    var r = fin.getBoundingClientRect();
+    var finalInView = (window.innerHeight * 0.88 > r.top) && (r.bottom > 0);
+    if (passedHero && !finalInView) { bar.classList.add('show'); }
+    else { bar.classList.remove('show'); }
   };
   window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
 })();
 </script>
